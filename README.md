@@ -126,6 +126,8 @@ src/
   "due_date": "2025-10-15T00:00:00Z"
 }
 
+## 📸 Vista previa de la API
+
 ![Vista previa de la API](./assets/api-preview.png)
 
 ## 📚 Vista previa de la documentación (Swagger)
