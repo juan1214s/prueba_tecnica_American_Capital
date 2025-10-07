@@ -131,7 +131,7 @@ src/
 ## 📚 Vista previa de la documentación (Swagger)
 
 <p align="center">
-  <img src="./assets/swagger-preview" alt="Swagger UI" width="800">
+  <img src="./assets/swagger-preview.png" alt="Swagger UI" width="800">
 </p>
 
 
