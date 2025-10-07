@@ -1,0 +1,39 @@
+version: "3.8"  # versión de docker-compose
+
+services:
+  # 🗄️ Servicio de base de datos PostgreSQL
+  db:
+    image: postgres:15
+    container_name: tasks_db
+    restart: always
+    environment:
+      POSTGRES_USER: juan
+      POSTGRES_PASSWORD: matas128
+      POSTGRES_DB: tasks_db
+    ports:
+      - "5432:5432"       # Permite conectarte desde pgAdmin o terminal
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persistencia de datos
+      - ./src/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro  # Script inicial
+
+  # 🚀 Servicio de tu API Node.js
+  api:
+    build: .                      # Usa el Dockerfile del proyecto
+    container_name: todo_api
+    restart: always
+    ports:
+      - "3200:3200"              # Puerto donde expondrá la API
+    depends_on:
+      - db                       # Asegura que la DB se inicie primero
+    environment:
+      DB_USER: juan
+      DB_PASS: matas128
+      DB_HOST: db                # 👈 Nombre del servicio "db", no localhost
+      DB_NAME: tasks_db
+      DB_PORT: 5432
+      PORT: 3200
+    volumes:
+      - .:/app                   # (opcional) para desarrollo: sincroniza tu código local con el contenedor
+
+volumes:
+  postgres_data:                 # Volumen nombrado para persistencia de datos
